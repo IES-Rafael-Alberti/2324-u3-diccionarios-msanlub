@@ -16,7 +16,7 @@ def main():
     """ Programa principal"""
     #entrada
     divisas = {'Euro':'€', 'Dollar':'$', 'Yen':'¥'}
-    codigoDeDivisa = input("Indica la divisa a elegir: ")
+    codigoDeDivisa = input("Indica la divisa a elegir: (Euro,Dollar,Yen)")
 
     #proceso
     simboloDivisa = dameSimboloDivisa(divisas,codigoDeDivisa)
