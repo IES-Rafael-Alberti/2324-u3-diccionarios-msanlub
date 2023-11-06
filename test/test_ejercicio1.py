@@ -7,4 +7,3 @@ def test_dameSimboloDivisa():
 
 def test_dameSimboloDivisaQueNoExiste():
     assert dameSimboloDivisa({'Euro':'€', 'Dollar':'$', 'Yen':'¥'},'kk') == ''
-

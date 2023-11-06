@@ -12,7 +12,8 @@ def dameSimboloDivisa(divisas:dict,codigoDeDivisa:str) -> str:
 
     return divisas.get(codigoDeDivisa,"")
 
-if __name__=="__main__":
+def main():
+    """ Programa principal"""
     #entrada
     divisas = {'Euro':'€', 'Dollar':'$', 'Yen':'¥'}
     codigoDeDivisa = input("Indica la divisa a elegir: ")
@@ -22,3 +23,7 @@ if __name__=="__main__":
 
     #salida
     print("Su símbolo es: " + simboloDivisa)
+
+
+if __name__=="__main__":
+    main()
