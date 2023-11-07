@@ -1,31 +1,29 @@
 '''Escribir un programa que guarde en un diccionario los precios de las frutas de la tabla, pregunte al usuario por una fruta, un número de kilos y muestre por pantalla el precio de ese número de kilos de fruta. Si la fruta no está en el diccionario debe mostrar un mensaje informando de ello.'''
 
-def precioTotal(frutas:dict,fruta:str,kilos:float) ->float:
-    '''Devuelve el precio de los kilos de la fruta que quiere el usuario.
+def precio(frutas:dict,fruta:str) ->float:
+    '''Devuelve el precio del kilo de la fruta que quiere el usuario.
      
     Args:
-        frutas(dict),fruta(str),kilos(float)
+        frutas(dict),fruta(str)
 
     Returns:
-        dict: diccionario actualizado con los datos.
+        float: precio de la fruta por kilo.
     '''
-    if fruta in frutas:
-        return frutas.values()*kilos
-
+    
+    return frutas.get(fruta) 
 
 
 def main():        
     #entrada
-    frutas = {'platano':'1.35','manzana':'0.80','pera':'0.85','naranja':'0.70'}
+    frutas = {'platano':1.35,'manzana':0.80,'pera':0.85,'naranja':0.70}
     fruta = input("Indica la fruta que quieres: ")
-    kilos = float(input("Indica ahora el peso en kilogramos que quieres: "))
-    #proceso
-    precio = precioTotal(frutas,fruta,kilos)
-    #salida
+    #proceso y salida
     if fruta in frutas:
-        print("El precio por " + str(kilos) + " kilos es: " + str(precio))
+        kilos = float(input("Indica ahora el peso en kilogramos que quieres: "))
+        precioTotal = precio(frutas,fruta) * kilos
+        print("El precio por " + str(kilos) + " kilos es: " + str(precioTotal))
     else:
-        "La fruta no existe."
+        print("La fruta no existe.")
 
 if __name__=="__main__":
     main()
