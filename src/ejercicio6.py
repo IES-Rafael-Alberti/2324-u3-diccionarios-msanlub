@@ -9,12 +9,11 @@ def nombreCorrecto(persona:dict,nombre:str) ->dict:
         
     Returns:
         devuelve el diccionario con el nuevo parametro.'''
-    try:
-        if nombre.isalpha():
-            persona.setdefault("nombre",nombre)
-            return persona
-    except AttributeError:
-        return AttributeError("El dato no es correcto.Debe ser una palabra.")
+    
+    if nombre.isalpha():
+        persona.setdefault("nombre",nombre)
+        return persona
+
 
 def edadCorrecta(persona:dict,edad:str) ->dict:
     '''Comprueba que la edad sea digitos
@@ -25,12 +24,11 @@ def edadCorrecta(persona:dict,edad:str) ->dict:
         
     Returns:
         devuelve el diccionario con el nuevo parametro.'''
-    try:
-        if int(edad) < 120 and edad.isdigit():
-            persona.setdefault("edad",edad)
-            return persona
-    except ValueError:
-        return ValueError("El dato no es correcto.")
+
+    if int(edad) < 120 and edad.isdigit():
+        persona.setdefault("edad",edad)
+        return persona
+
 
 def sexoCorrecto(persona:dict,sexo:str) ->dict:
     '''comprueba que el sexo sea um string((
@@ -92,7 +90,7 @@ def main():
         print(sexoCorrecto(persona,sexo))
     telefono = (input("Escriba su teléfono: "))
     if telefonoCorrecto(persona,telefono) == None:
-        print("El dato no es correcto, debe tener 6 caracteres.")
+        print("El dato no es correcto, debe tener 6 dígitos.")
     else:
         print(telefonoCorrecto(persona,telefono))
     correo = input("Escriba su correo electrónico: ")

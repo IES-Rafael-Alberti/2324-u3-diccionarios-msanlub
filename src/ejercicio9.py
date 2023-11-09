@@ -13,7 +13,22 @@ def añadirNuevaFactura(facturas:dict,nuevaFactura:str) ->dict:
     
     factura = nuevaFactura.split(":")
     facturas[factura[0]] = factura[1]
+    return facturas
 
+def cantidadPendienteDeCobro(facturas:dict) ->str:
+    '''calculamos la cantidad de facturas que faltan por pagar(las que no se han eliminado del diccionario)
+    
+    Args:
+        facturas(dict):diccionario o conjunto de facturas
+        
+    Return:
+        devuelve el valor de cada clave o factura'''
+    
+    total = 0
+    for factura in facturas.values():
+        total += factura
+    return total
+    
 
 def procesoPagarFactura(facturas:dict,codigoFactura:str) ->dict:
     '''elimina una factura en facturas
@@ -24,6 +39,7 @@ def procesoPagarFactura(facturas:dict,codigoFactura:str) ->dict:
         
     Returns:
         devuelve el conjunto de facturas sin las pagadas.'''
+    
     if codigoFactura in facturas:
         del facturas[codigoFactura]
         return("La factura se ha pagado.")
@@ -43,17 +59,20 @@ def main():
         entrada = input("Indica qué quiere hacer: ")
         if entrada == añadirFactura:
             nuevaFactura = input("Indica el número de factura y su coste (separado por : ): ")
-            añadirNuevaFactura(facturas,nuevaFactura)
+            añadida = añadirNuevaFactura(facturas,nuevaFactura)
+            print(añadida)
             print("Factura añadida.")
         elif entrada == pagarFactura:
             codigoFactura = input("Indica el número de la factura: ")
-            print(procesoPagarFactura(facturas,codigoFactura))
+            pagada = procesoPagarFactura(facturas,codigoFactura)
+            print(pagada)
+        #salida
         elif entrada == salir:
-            print("Fin.")
+            print("Lo que falta por cobrar es: " + str(cantidadPendienteDeCobro(facturas)) + " .Fin.")
+
         else:
             print("No existe esa opción.")
-    #salida
-    print("xaaao xao xao xao")
+    
 
 
 if __name__=="__main__":

@@ -8,6 +8,7 @@ def totalCreditos(curso:dict):
         
     Returns:
         el total de los creditos de todas las asignaturas.'''
+
     total = 0
     for creditos in curso.values():
         total += creditos
