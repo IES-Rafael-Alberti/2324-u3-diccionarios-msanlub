@@ -10,6 +10,7 @@ def ingresarEnDiccionario(diccionario:dict,palabra:str) ->dict:
         
     Returns:
         devuelve el diccionario con la palabra y su traducción añadid.'''
+    
     palabras = palabra.split(":")
     if len(palabras) == 2:
         diccionario[palabras[0]] = palabras[1]

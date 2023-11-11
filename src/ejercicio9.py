@@ -16,41 +16,62 @@ def añadirNuevaFactura(facturas:dict,nuevaFactura:str) ->dict:
     return facturas
 
 def cantidadPendienteDeCobro(facturas:dict) ->str:
-    '''calculamos la cantidad de facturas que faltan por pagar(las que no se han eliminado del diccionario)
+    '''calculamos el total del costo de las facturas que faltan por pagar(las que no se han eliminado del diccionario)
     
     Args:
         facturas(dict):diccionario o conjunto de facturas
         
     Return:
-        devuelve el valor de cada clave o factura'''
+        devuelve la cantidad que falta por cobrar (valor de las claves del diccionario)'''
     
     total = 0
-    for factura in facturas.values():
-        total += factura
+    for factura in facturas:
+        total += int(facturas[factura])
     return total
     
 
-def procesoPagarFactura(facturas:dict,codigoFactura:str) ->dict:
+def procesoPagarFactura(facturas:dict,codigoFactura:str,facturasPagadas:dict) ->dict:
     '''elimina una factura en facturas
     
     Args:
         facturas(dict): diccionario donde se ingresan las facturas guardadas por el usuario
-        facturaImpagada(str): facturas a eliminar por el usuario
+        codigoFactura(str): codigo de facturas a eliminar por el usuario
         
     Returns:
         devuelve el conjunto de facturas sin las pagadas.'''
     
+    
     if codigoFactura in facturas:
+        facturasPagadas[codigoFactura] = facturas[codigoFactura]
+
         del facturas[codigoFactura]
         return("La factura se ha pagado.")
     else:
         return ("La factura no existe.")
 
 
+def cantidadCobrada(facturasPagadas:dict):
+    '''calculamos el total que se ha cobrado de las facturas.
+    
+    Args:
+        facturas(dict):diccionario o conjunto de facturas
+        codigoFactura(str): codigo de facturas a eliminar por el usuario
+        
+    Return:
+        la suma de valores que se han cobrado(los valores de las facturas que se eliminan del diccionario)'''
+    
+    total = 0
+    for factura in facturasPagadas.values():
+        total += int(factura)
+    return total
+
+    
+
 def main():
     '''programa principal'''
     #entrada y proceso
     facturas = {}
+    facturasPagadas = {}
     salir = "0"
     añadirFactura = "1"
     pagarFactura = "2"
@@ -60,16 +81,14 @@ def main():
         if entrada == añadirFactura:
             nuevaFactura = input("Indica el número de factura y su coste (separado por : ): ")
             añadida = añadirNuevaFactura(facturas,nuevaFactura)
-            print(añadida)
             print("Factura añadida.")
         elif entrada == pagarFactura:
             codigoFactura = input("Indica el número de la factura: ")
-            pagada = procesoPagarFactura(facturas,codigoFactura)
+            pagada = procesoPagarFactura(facturas,codigoFactura,facturasPagadas)
             print(pagada)
         #salida
         elif entrada == salir:
-            print("Lo que falta por cobrar es: " + str(cantidadPendienteDeCobro(facturas)) + " .Fin.")
-
+            print("Lo que falta por cobrar es: " + str(cantidadPendienteDeCobro(facturas)) + " .Lo que se ha cobrado es: " + str(cantidadCobrada(facturasPagadas)) + " .Fin")
         else:
             print("No existe esa opción.")
     
